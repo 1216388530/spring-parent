@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--启动注解扫描模式-->
+    <context:component-scan base-package="com.myself.spring.base.jdbcTemplate"></context:component-scan>
+
+    <!--引入外部资源文件-->
+    <context:property-placeholder location="classpath:druid.properties"></context:property-placeholder>
+    <!--利用表达式获取引入的属性文件中的数据-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${druid.driverClassName}"></property>
+        <property name="username" value="${druid.username}"></property>
+        <property name="password" value="${druid.password}"></property>
+        <property name="url" value="${druid.url}"></property>
+    </bean>
+
+    <util:list id="testList">
+        <value>${druid.driverClassName}</value>
+        <value>${druid.username}</value>
+        <value>${druid.password}</value>
+        <value>${druid.url}</value>
+    </util:list>
+    <!--配置jdbcTemplate对象-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--事务配置-->
+    <bean id = "transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--开启事务注解，指明事务管理器-->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+</beans>

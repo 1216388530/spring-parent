@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myself.spring.mybatis.demo1.mapper.UserMapper">
+    <!--int insertUser();-->
+    <insert id="insertUser">
+        INSERT INTO t_user VALUES(NULL,'admin','123',23,'无',NULL)
+    </insert>
+
+    <!--User getUserById();-->
+    <!--
+        查询记录的标签必须设置resultType或resultMap
+            resultType：会根据默认的映射关系（字段名和属性名一致），将记录中的数据填充到返回值对象的属性中
+            resultMap：会根据自定义的映射关系（自定义字段名和属性名的对应），将记录中的数据填充到返回值对象的属性中
+    -->
+    <select id="getUserById" resultType="User">
+        select * from t_user where id=1;
+    </select>
+
+    <!--List<User> getAllUser();-->
+    <select id="getAllUser" resultType="User">
+        select * from t_user;
+    </select>
+
+</mapper>

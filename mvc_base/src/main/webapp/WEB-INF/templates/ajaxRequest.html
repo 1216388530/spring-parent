@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/static/css/layui.css}">
+</head>
+<body>
+<button id="button1" type="button" class="layui-btn layui-btn-normal">test</button><br/>
+<button id="button2" type="button" class="layui-btn layui-btn-normal">百搭按钮</button><br/>
+<button id="button3" type="button" class="layui-btn layui-btn-normal">百搭按钮</button><br/>
+
+<script th:src="@{/static/js/jquery3_5_1.js}" ></script>
+<script type="text/javascript">
+    //为每一个按钮绑定一个ajax请求点击事件
+    $("#button1").click(function(){
+        $.ajax({
+            url:"http://localhost:8080/mvc_base/ajax/user/1",
+            data:"",
+            type:"GET",
+            success:function (data){
+                console.log(data);//响应体中的字符串生成的json对象
+            },
+            dataType:"json"
+        });
+    });
+</script>
+</body>
+</html>

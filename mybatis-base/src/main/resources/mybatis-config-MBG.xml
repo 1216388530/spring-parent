@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--核心配置文件-->
+<configuration>
+    <!--推荐：结合log4j日志框架-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
+
+
+    <typeAliases>
+<!--        <typeAlias type="com.myself.spring.mybatis.demo1.pojo.User"></typeAlias>-->
+        <package name="com.myself.spring.mybatis.mbg.pojo"/>
+    </typeAliases>
+    <!--推荐：配置分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+    <!--设置连接数据库的环境-->
+    <environments default="development">
+        <environment id="development">
+            <!--这里设定的是事务管理器，JDBC表示是原生的JDBC事务管理器-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=CONVERT_TO_NULL&amp;allowMultiQueries=true&amp;rewriteBatchedStatements=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456789"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射配置文件-->
+    <mappers>
+<!--        <mapper resource="mappers/UserMapper.xml"/>-->
+        <package name="com.myself.spring.mybatis.mbg.mapper"/>
+    </mappers>
+</configuration>

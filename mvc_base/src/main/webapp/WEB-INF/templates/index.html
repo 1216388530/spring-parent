@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html  lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <div>首页</div>
+<!--    这里的的属性th:href的值会转化成属性href的值，但是会利用后端的方式来解析相对路径-->
+<!--    在前面加上  http://localhost:8080/项目名/target -->
+<a th:href="@{/target(name='中文')}">跳转到 target 页面</a>
+</body>
+</html>

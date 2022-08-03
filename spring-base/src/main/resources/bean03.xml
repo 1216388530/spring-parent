@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--工厂bean-->
+    <bean id="userFactory" class="com.myself.spring.base.xml.UserFactory"></bean>
+
+    <!--多例与单例Bean-->
+    <bean id="area" class="com.myself.spring.base.xml.OfficeArea" scope="prototype">
+        <property name="name" value="area"></property>
+        <property name="size" value="10"></property>
+    </bean>
+
+    <!--生命周期-->
+    <bean id="springBeanLife" class="com.myself.spring.base.xml.SpringBeanLife" init-method="init" destroy-method="destroy">
+        <property name="property" value="life"></property>
+    </bean>
+    <!--生命周期-->
+    <bean id="myBeanPostProcessor" class="com.myself.spring.base.xml.MyBeanPostProcessor"></bean>
+</beans>

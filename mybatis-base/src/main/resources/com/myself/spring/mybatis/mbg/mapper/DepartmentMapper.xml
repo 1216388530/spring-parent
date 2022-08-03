@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.myself.spring.mybatis.mbg.mapper.DepartmentMapper" >
+
+  <resultMap id="BaseResultMap" type="com.myself.spring.mybatis.mbg.pojo.Department" >
+    <id column="did" property="did" jdbcType="INTEGER" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dept
+    where did = #{did,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.myself.spring.mybatis.mbg.pojo.Department" >
+    insert into t_dept (did, dept_name)
+    values (null, #{deptName,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.myself.spring.mybatis.mbg.pojo.Department" >
+    update t_dept
+    set dept_name = #{deptName,jdbcType=VARCHAR}
+    where did = #{did,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select did, dept_name
+    from t_dept
+    where did = #{did,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select did, dept_name
+    from t_dept
+  </select>
+</mapper>

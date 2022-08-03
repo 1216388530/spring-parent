@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" monitorInterval="5">
+    <properties>
+        <property name="LOG_HOME">C:\LFH Private Space\work\java\IdeaProjects\spring-parent\log\src\main\logs</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] [%-5level] %c{36}:%L -
+                                    -- %m%n" />
+        </Console>
+        <File name="file" fileName="${LOG_HOME}/myfile.log">
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] %l
+                                    %c{36} - %m%n" />
+        </File>
+        <!--将name=file的Appender变成异步的Appender-->
+        <Async name="async">
+            <AppenderRef ref="file"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Logger name="mylog" level="trace" additivity="false">
+            <!--使用异步的Appender-->
+            <AppenderRef ref="async" />
+            <AppenderRef ref="Console" />
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

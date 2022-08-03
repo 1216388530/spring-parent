@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+ * 使用RESTFul风格的请求来实现对服务器资源的增删改查
+ *      请求路径    请求方式   实际功能
+ *      /RESTFul/user       get     获得所有用户信息
+ *      /RESTFul/user/1     get     获得id为1的用户信息
+ *      /RESTFul/user       post    新增用户信息
+ *      /RESTFul/user/1     delete  删除id为1用户信息
+ *      /RESTFul/user       PUT     更新指定用户信息
+-->
+    <a th:href="@{/RESTFul/user}">获得所有用户信息</a><br>
+
+    <a th:href="@{/RESTFul/user/1}">获得id为1的用户信息</a><br>
+
+    <form th:action="@{/RESTFul/user}"  method="post"><input type="submit" value="新增用户"></form>
+
+    <form th:action="@{/RESTFul/user/1}"  method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="删除用户">
+    </form>
+
+    <form th:action="@{/RESTFul/user}"  method="post">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="submit" value="更新用户">
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!--配置User对象的创建-->
+    <bean id="userFactory" class="com.myself.spring.base.xml.User"></bean>
+
+    <!--展示了set方式输入基本属性-->
+    <bean id="area01" class="com.myself.spring.base.xml.OfficeArea">
+        <property name="size" value="100.5"></property>
+        <property name="name">
+            <value><![CDATA[办公区域<01>]]></value>
+        </property>
+        <property name="objIsNull">
+            <null/>
+        </property>
+    </bean>
+
+    <bean id="ministryOfPersonnel" class="com.myself.spring.base.xml.Department">
+        <property name="name" value="人事部"></property>
+
+        <!--外部bean注入-->
+        <property name="area" ref="area01"></property>
+
+        <!--内部bean注入-->
+        <property name="leader">
+            <bean id="leader" class="com.myself.spring.base.xml.DepartmentLeader">
+                <property name="name" value="人事部领导"></property>
+            </bean>
+        </property>
+
+        <!--级联赋值：在属性已经注入的基础上使用，会修改对象的值-->
+        <property name="area.name">
+            <value><![CDATA[办公区域<02>]]></value>
+        </property>
+    </bean>
+
+
+    <bean id="collectionType" class="com.myself.spring.base.xml.CollectionType">
+        <property name="array">
+            <array>
+                <!--内部bean注入-->
+                <bean class="com.myself.spring.base.xml.DepartmentLeader">
+                    <property name="name" value="leader01"></property>
+                </bean>
+                <bean class="com.myself.spring.base.xml.DepartmentLeader">
+                    <property name="name" value="leader02"></property>
+                </bean>
+                <bean class="com.myself.spring.base.xml.DepartmentLeader">
+                    <property name="name" value="leader03"></property>
+                </bean>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <!--外部bean注入-->
+                <ref bean="leader01"></ref>
+                <ref bean="leader02"></ref>
+                <ref bean="leader03"></ref>
+            </list>
+        </property>
+        <property name="set">
+            <list>
+                <!--基本数值注入-->
+                <value>基本数值1</value>
+                <value>基本数值2</value>
+                <value>基本数值3</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="leader01" value-ref="leader01"></entry>
+                <entry key="leader02" value-ref="leader02"></entry>
+                <entry key="leader03">
+                    <bean class="com.myself.spring.base.xml.DepartmentLeader">
+                        <property name="name" value="leader03"></property>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="leader01" class="com.myself.spring.base.xml.DepartmentLeader">
+        <property name="name" value="leader01"></property>
+    </bean>
+    <bean id="leader02" class="com.myself.spring.base.xml.DepartmentLeader">
+        <property name="name" value="leader02"></property>
+    </bean>
+    <bean id="leader03" class="com.myself.spring.base.xml.DepartmentLeader">
+        <property name="name" value="leader03"></property>
+    </bean>
+
+    <util:list id="stringList">
+        <value>element1</value>
+        <value>element2</value>
+        <value>element3</value>
+    </util:list>
+</beans>
