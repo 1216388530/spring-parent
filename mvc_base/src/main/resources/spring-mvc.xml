@@ -61,7 +61,7 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
     <!--git提交时，会出错，建议不用使用-->
-<!--    <mvc:view-controller path="/toAjaxRequestPage" view-name="ajaxRequest"></mvc:view-controller>-->
+ <mvc:view-controller path="/toAjaxRequestPage" view-name="ajaxRequest"></mvc:view-controller>
 
 
 </beans>
