@@ -15,6 +15,7 @@ public class JULTest {
     //基本
     @Test
     public void testJULBase(){
+        //github pull test
         Logger logger = Logger.getLogger("myLogger");
         logger.info("消息");
         logger.warning("警告");
